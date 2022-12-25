@@ -22,19 +22,26 @@ function getPlayerChoice() {
 }
 
 function playRound(computerSelection, playerSelection) {
+    const draft = "No one wins! Try again!";
+    const win = `You won! ${playerSelection} beats ${computerSelection}!`;
+    const loss = `You loss! ${computerSelection} beats ${playerSelection}!`;
 
     console.log(computerSelection);
     if (computerSelection === playerSelection) {
-        return "No one wins! Try again!";
+        return draft;
     } else if ( computerSelection === "rock" && playerSelection === "paper" || 
                 computerSelection === "paper" && playerSelection === "scisors" ||
                 computerSelection === "scisors" && playerSelection === "rock") {
-        return `You won! ${playerSelection} beats ${computerSelection}!`;
+        return win;
 
     } else {
-        return `You loss! ${computerSelection} beats ${playerSelection}!`;
+        return loss;
     }
 }
 
-alert(playRound(getComputerChoice(), getPlayerChoice()));
+function game() {
 
+    for (let i = 0; i <= 5; i++) {
+        playRound()
+    }
+}
