@@ -1,25 +1,40 @@
 /* SCRIPT of the game */
 
+
 function getComputerChoice() {
     const computerChoice = Math.floor(Math.random() * 3);
-    let computerSelection;
 
     if (computerChoice === 0) {
-        computerSelection = "Rock";
+        return "rock";
     } else if (computerChoice === 1) {
-        computerSelection = "Paper";
+        return "paper";
     } else {
-        computerSelection = "Scisors";
+        return "scisors";
     }
-    return computerSelection;
 }
 
 function getPlayerChoice() {
-    let playerSelection = prompt("Rock, Paper or Scisors ?", "");
+    let playerSelection;
 
+    playerSelection = prompt("Rock, Paper or Scisors ?", "");
     playerSelection = playerSelection.toLowerCase();
     return playerSelection;
 }
 
+function playRound(computerSelection, playerSelection) {
 
-console.log(getPlayerChoice());
+    console.log(computerSelection);
+    if (computerSelection === playerSelection) {
+        return "No one wins! Try again!";
+    } else if ( computerSelection === "rock" && playerSelection === "paper" || 
+                computerSelection === "paper" && playerSelection === "scisors" ||
+                computerSelection === "scisors" && playerSelection === "rock") {
+        return `You won! ${playerSelection} beats ${computerSelection}!`;
+
+    } else {
+        return `You loss! ${computerSelection} beats ${playerSelection}!`;
+    }
+}
+
+alert(playRound(getComputerChoice(), getPlayerChoice()));
+
