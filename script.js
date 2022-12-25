@@ -2,7 +2,11 @@
 
 function getComputerChoice() {
     const computerChoice = Math.floor(Math.random() * 3);
-    return computerChoice;
+    if (computerChoice === 0) {
+        return "Rock";
+    } else if (computerChoice === 1) {
+        return "Paper";
+    } return "Scisors";
 }
 
 console.log(getComputerChoice());
