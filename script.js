@@ -1,6 +1,5 @@
 /* SCRIPT of the game */
 
-
 function getComputerChoice() {
     const computerChoice = Math.floor(Math.random() * 3);
 
@@ -22,26 +21,51 @@ function getPlayerChoice() {
 }
 
 function playRound(computerSelection, playerSelection) {
-    const draft = "No one wins! Try again!";
-    const win = `You won! ${playerSelection} beats ${computerSelection}!`;
-    const loss = `You loss! ${computerSelection} beats ${playerSelection}!`;
 
     console.log(computerSelection);
     if (computerSelection === playerSelection) {
-        return draft;
+        console.log(`Draft!`);
+        return "draft";
     } else if ( computerSelection === "rock" && playerSelection === "paper" || 
                 computerSelection === "paper" && playerSelection === "scisors" ||
                 computerSelection === "scisors" && playerSelection === "rock") {
-        return win;
+        
+        console.log(`You won! ${playerSelection} beats ${computerSelection}!`);
+        return "win";
 
     } else {
-        return loss;
+        console.log(`You loss! ${computerSelection} beats ${playerSelection}!`);
+        return "loss";
     }
 }
 
 function game() {
 
-    for (let i = 0; i <= 5; i++) {
-        playRound()
+    let playerPoints = 0;
+    let computerPoints = 0;
+
+    for (let i = 0; i < 5; i++) {
+        
+        let result = playRound(getComputerChoice(), getPlayerChoice());
+
+        if (result === "win") {
+            playerPoints = playerPoints + 1;
+        } else if (result === "loss") {
+            computerPoints = computerPoints + 1;
+        }
     }
+
+    if (playerPoints > computerPoints) {
+        alert(`You won! ${playerPoints} - ${computerPoints}`);
+    } else if (playerPoints < computerPoints) {
+        alert(`You loss! ${playerPoints} - ${computerPoints}`);
+    } else alert(`Draft! ${playerPoints} - ${computerPoints}`);
 }
+
+function restartGame() {
+    let restart = confirm("Play again?");
+    if (restart = true) game();
+}
+
+game()
+restartGame();
