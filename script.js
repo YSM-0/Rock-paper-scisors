@@ -1,4 +1,22 @@
-/* SCRIPT of the game */
+// VARIABLES 
+
+const startButton = document.querySelector('#startButton');
+const choiceButtons = document.querySelectorAll('.choiceButton');
+const displayResult = document.querySelectorAll('.finalResult');
+const winResult = document.getElementById('win');
+const lossResult = document.getElementById('loss');
+
+const rockButton = document.getElementById('rockButton');
+const paperButton = document.getElementById('paperButton');
+const scissorsButton = document.getElementById('scissorsButton');
+
+const playerResultElement = document.querySelector('#playerResult');
+const computerResultElement = document.querySelector('#computerResult');
+
+let playerResult = 0;
+let computerResult = 0;
+
+// FUNCTIONS
 
 function getComputerChoice() {
     const computerChoice = Math.floor(Math.random() * 3);
@@ -8,58 +26,41 @@ function getComputerChoice() {
     } else if (computerChoice === 1) {
         return "paper";
     } else {
-        return "scisors";
+        return "scissors";
     }
-}
-
-function getPlayerChoice() {
-    let playerSelection;
-
-    playerSelection = prompt("Rock, Paper or Scisors ?", "");
-    playerSelection = playerSelection.toLowerCase();
-    return playerSelection;
 }
 
 function playRound(computerSelection, playerSelection) {
-
     console.log(computerSelection);
+
     if (computerSelection === playerSelection) {
         console.log(`Draft!`);
-        return "draft";
     } else if ( computerSelection === "rock" && playerSelection === "paper" || 
-                computerSelection === "paper" && playerSelection === "scisors" ||
-                computerSelection === "scisors" && playerSelection === "rock") {
+                computerSelection === "paper" && playerSelection === "scissors" ||
+                computerSelection === "scissors" && playerSelection === "rock") {
         
         console.log(`You won! ${playerSelection} beats ${computerSelection}!`);
-        return "win";
-
+        playerResult++;
+        playerResultElement.innerText = playerResult;
     } else {
         console.log(`You loss! ${computerSelection} beats ${playerSelection}!`);
-        return "loss";
-    }
-}
-
-function game() {
-
-    let playerPoints = 0;
-    let computerPoints = 0;
-
-    for (let i = 0; i < 5; i++) {
-        
-        let result = playRound(getComputerChoice(), getPlayerChoice());
-
-        if (result === "win") {
-            playerPoints = playerPoints + 1;
-        } else if (result === "loss") {
-            computerPoints = computerPoints + 1;
-        }
+        computerResult++;
+        computerResultElement.innerText = computerResult;
     }
 
-    if (playerPoints > computerPoints) {
-        alert(`You won! ${playerPoints} - ${computerPoints}`);
-    } else if (playerPoints < computerPoints) {
-        alert(`You loss! ${playerPoints} - ${computerPoints}`);
-    } else alert(`Draft! ${playerPoints} - ${computerPoints}`);
+    if (playerResult === 3) { 
+        document.querySelectorAll('.results').forEach((result) => result.classList.add('hide'));
+        winResult.classList.remove('hide');
+        choiceButtons.forEach((button) => button.classList.add('hide'));
+        startButton.innerText = 'RESTART';
+        startButton.classList.remove('hide');
+    } else if (computerResult === 3) {
+        document.querySelectorAll('.results').forEach((result) => result.classList.add('hide'));
+        lossResult.classList.remove('hide');
+        choiceButtons.forEach((button) => button.classList.add('hide'));
+        startButton.innerText = 'RESTART';
+        startButton.classList.remove('hide');
+    } return;
 }
 
 function restartGame() {
@@ -67,5 +68,35 @@ function restartGame() {
     if (restart = true) game();
 }
 
-game()
-restartGame();
+function init() {
+    startButton.classList.add('hide');
+    displayResult.forEach((finalResult) => finalResult.classList.add('hide'));
+    document.querySelectorAll('.results').forEach((result) => result.classList.remove('hide'));
+    choiceButtons.forEach((button) => button.classList.remove('hide'));
+
+    playerResult = 0;
+    computerResult = 0;
+
+    playerResultElement.innerText = playerResult;
+    computerResultElement.innerText = computerResult;
+    return;
+}
+ 
+// SCRIPT OF THE GAME
+
+choiceButtons.forEach((button) => button.classList.add('hide'));
+displayResult.forEach((results) => results.classList.add('hide'));
+
+startButton.addEventListener('click', init);
+
+rockButton.addEventListener('click', function rock() {
+    playRound(getComputerChoice(), 'rock');
+});
+paperButton.addEventListener('click', function paper() {
+    playRound(getComputerChoice(), 'paper');
+});
+scissorsButton.addEventListener('click', function scissors() {
+    playRound(getComputerChoice(), 'scissors');
+});
+
+

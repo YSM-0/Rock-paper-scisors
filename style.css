@@ -1,0 +1,107 @@
+/* stylesheet */
+
+.container {
+    display: flex;
+}
+
+.container > #playerSection, #computerSection {
+    flex: 1;
+}
+
+#playground {
+    background-color: rgb(212, 208, 208);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#resultSection {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+#resultSection > div {
+    flex: 1;
+}
+
+#resultSection > .empty {
+    display: flex;
+}
+
+#resultScreen {
+    display: flex;
+    border: solid;
+    background-color: rgb(0, 0, 0);
+    border-style:groove;
+    align-items: center;
+}
+
+#startButton {
+    height: 25%;
+    width: 50%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 300%;
+    text-align: center;
+}
+
+#startButton:hover {
+    height: 25%;
+    width: 50%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 300%;
+    text-align: center;
+    color: white;
+    background-color: black;
+    transition: .3s;
+}
+
+
+#controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.choiceButton {
+    flex: 0, 1;
+    width: 180px;
+    height: 50px;
+}
+
+.choiceButton:hover {
+    flex: 0, 1;
+    width: 180px;
+    height: 50px;
+    text-align: center;
+    color: white;
+    background-color: black;
+    transition: .3s;
+}
+
+.results {
+    flex: 1;
+    color: white;
+    text-align: center;
+    font-size: 550%;
+}
+
+.hide {
+    display: none;
+}
+
+.titleDiv {
+    align-items: center;
+    justify-content: center;
+}
+
+.finalResult {
+    color: white;
+    flex: 1;
+    text-align: center;
+    width: 100%;
+    font-size: 200%;
+}
